@@ -1,0 +1,8 @@
+node_modules
+dist
+
+
+# extraneous files
+.DS_STORE
+
+
