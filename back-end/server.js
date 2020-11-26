@@ -9,7 +9,7 @@ var Names = mongoose.model('Names', nameSchema);
 app.use(express.json());
 
 mongoose.connection.once('open', function(){
-    app.use(express.static('delete-edit-demo/dist/delete-edit-demo/'))
+    app.use(express.static('../delete-edit-demo/dist/delete-edit-demo/'))
     app.use('/', express.query());
 
     app.get('/names', function (request, response) {
