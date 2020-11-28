@@ -1,0 +1,15 @@
+<nav class="navbar navbar-light bg-dark">
+  <ul class="nav">
+    <li class="nav-item">
+      <a [routerLink]="'names-management'" class="navbar-brand text-light">Names Management</a>
+    </li>
+    <li class="nav-item">
+      <a [routerLink]="'tasks'" class="navbar-brand text-light">Tasks</a>
+    </li>
+  </ul>
+  <a [routerLink]="'project-management'" class="navbar-brand text-light">Project Management</a>
+</nav>
+
+<div class="container">
+  <router-outlet></router-outlet>
+</div>

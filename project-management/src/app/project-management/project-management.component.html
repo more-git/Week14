@@ -1,0 +1,49 @@
+<input [(ngModel)]="newProject">
+<button (click)="saveProject()">Save</button>
+
+<input type="text" ngbDatepicker #d="ngbDatepicker"/>
+<button (click)="d.toggle()">Start Date</button>
+
+<input type="text" ngbDatepicker #a="ngbDatepicker"/>
+<button (click)="a.toggle()" >End Date</button>
+
+
+<h3>Projects!</h3>
+<div *ngFor="let project of projects">
+  <div class="row">
+    <h4>{{ project.name }}</h4>
+    <button type="button" class="btn btn-danger" (click)="deleteProject(project)">Delete</button>
+    <button type="button" class="btn btn-secondary" (click)="newEditProject(editModal, project)">Edit</button>
+  </div>
+</div>
+
+
+<ng-template #editModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Edit Project</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+   <!-- <form>-->
+      <!--<div class="form-group">-->
+      <div>
+        <label for="editProjectInput">Edit the selected prject:</label>
+        <div class="input-group">
+          <input id="editProjectInput" class="form-control" [(ngModel)]="editProject.name" project="Edit Project">
+        	
+		    </div>
+      </div>
+    <!--/form>-->
+  </div>
+  <div class="modal-footer">
+	<input type="text" ngbDatepicker #d="ngbDatepicker"/>
+	<button (click)="d.toggle()">Start Date</button>
+
+	<input type="text" ngbDatepicker #a="ngbDatepicker"/>
+	<button (click)="a.toggle()" >End Date</button>
+
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close()">Save</button>
+  </div>
+</ng-template>
