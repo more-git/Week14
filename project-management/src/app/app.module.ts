@@ -3,9 +3,9 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NamesManagementComponent } from './names-management/names-management.component';
-import {FormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
+import { ProjectManagementComponent } from "./project-management/project-management.component";
+import { FormsModule } from "@angular/forms";
+import { HttpClientModule } from "@angular/common/http";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -14,7 +14,7 @@ import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
-    NamesManagementComponent
+    ProjectManagementComponent
   ],
   imports: [
     BrowserModule,
@@ -22,7 +22,7 @@ import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     HttpClientModule,
     NgbModule,
-	NgbDatepickerModule
+	  NgbDatepickerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {NamesManagementComponent} from "./names-management/names-management.component";
+import { ProjectManagementComponent } from "./project-management/project-management.component";
 
 const routes: Routes = [
-  {path: 'names-management', component: NamesManagementComponent}
+  {path: 'project-management', component: ProjectManagementComponent}
 ];
 
 @NgModule({

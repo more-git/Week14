@@ -2,18 +2,18 @@ var express = require('express');
 var app = express();
 var mongoose = require('mongoose');
 
-var db = mongoose.connect('mongodb://localhost/namesdb');
-var nameSchema = require('./name_schema.js').nameSchema;
-var Names = mongoose.model('Names', nameSchema);
+var db = mongoose.connect('mongodb://localhost/projectsdb');
+var projectSchema = require('./project_schema.js').projectSchema;
+var Projects = mongoose.model('Projects', projectSchema);
 
 app.use(express.json());
 
 mongoose.connection.once('open', function(){
-    app.use(express.static('../delete-edit-demo/dist/delete-edit-demo/'))
+    app.use(express.static('../project-management/dist/project-management/'))
     app.use('/', express.query());
 
     app.get('/names', function (request, response) {
-        var query = Names.find();
+        var query = Projects.find();
         query.exec(function (err, docs){
             response.status(200);
             response.send(JSON.stringify({docs}));
@@ -21,11 +21,11 @@ mongoose.connection.once('open', function(){
     })
 
     app.post('/name', function (request, response) {
-        var newName = new Names({
+        var newProject = new Projects({
             name: request.body.name
         });
-        console.log(newName)
-        newName.save(function (err, doc) {
+        //console.log(newProject)
+        newProject.save(function (err, doc) {
             response.status(200);
             response.send(JSON.stringify(doc));
         })
@@ -36,7 +36,7 @@ mongoose.connection.once('open', function(){
     })
 
     app.delete('/name/*', function (req, res){
-        query = Names.deleteOne({'_id': req.params[0]});
+        query = Projects.deleteOne({'_id': req.params[0]});
         query.exec(function (err) {
                 res.status(200);
                 res.send(JSON.stringify({}));
@@ -45,9 +45,7 @@ mongoose.connection.once('open', function(){
     })
 
     app.put('/update/*',function(req, res)  {
-
-        //console.log();
-        var query = Names.findByIdAndUpdate(req.body._id, {"name": req.body.name});
+        var query = Projectss.findByIdAndUpdate(req.body._id, {"name": req.body.name});
         query.exec(function (err, doc) {
             res.status(200);
             res.send(JSON.stringify(doc));
