@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
+import { Socket } from "ngx-socket-io";
 import { environment } from "../../environments/environment";
 import { Project } from "../_models/project.model";
 import { map } from "rxjs/operators";
@@ -10,7 +11,7 @@ import { map } from "rxjs/operators";
 })
 export class ProjectsService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private socket: Socket, private httpClient: HttpClient) { }
 
   getAll(): Observable<any> {
     return this.httpClient.get<any>(`${environment.apiUrl}/names`)
