@@ -8,23 +8,25 @@ import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
-import { TasksComponent } from './tasks/tasks.component';
+
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+const config: SocketIoConfig = { url: 'http://localhost:8001', options: {} };
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    TasksComponent,
     ProjectManagementComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    SocketIoModule.forRoot(config),
     FormsModule,
     HttpClientModule,
     NgbModule,
-	NgbDatepickerModule
+	  NgbDatepickerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
