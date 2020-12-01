@@ -6,6 +6,7 @@ import { environment } from "../../environments/environment";
 import { Project } from "../_models/project.model";
 import { map } from "rxjs/operators";
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -14,16 +15,16 @@ export class ProjectsService {
   constructor(private socket: Socket, private httpClient: HttpClient) { }
 
   getAll(): Observable<any> {
-    return this.httpClient.get<any>(`${environment.apiUrl}/names`)
+    return this.httpClient.get<any>(`${environment.apiUrl}/names`);
   }
 
   create( newName ): Observable<Project> {
     return this.httpClient.post<any>(`${environment.apiUrl}/name`, {name: newName})
       .pipe(map(newName => new Project(newName.name)));
   }
- 
+
   destroy( name ): Observable<any> {
-    return this.httpClient.delete(`${environment.apiUrl}/name/${name._id}`)
+    return this.httpClient.delete(`${environment.apiUrl}/name/${name._id}`);
   }
 
   removeProject( arrayNames, nameToRemove ): any{
@@ -38,7 +39,7 @@ export class ProjectsService {
   updateProject( nameToUpdate ): any{
     let options = { name: nameToUpdate.name, _id: nameToUpdate._id };
     return this.httpClient.request<any>('PUT', `${environment.apiUrl}/update/`, { body: options });
-    //return this.httpClient.request<any>('PUT', `${environment.apiUrl}/update/${nameToUpdate._id}/${nameToUpdate.name}`);
+    // return this.httpClient.request<any>('PUT', `${environment.apiUrl}/update/${nameToUpdate._id}/${nameToUpdate.name}`);
   }
 
   editProject( arrayNames, nameToEdit ): any{
