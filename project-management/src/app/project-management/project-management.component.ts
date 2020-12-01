@@ -68,7 +68,7 @@ export class ProjectManagementComponent implements OnInit {
     this.projectsService.create(this.newProject).subscribe( saveProject => {
      
       	this.projects.push(saveProject);
-  		this.messageList.push(saveProject);
+  		this.messageList.push(this.timeMessage);
     })
 
     //this.projectsService.create(this.newProject).subscribe( saveProject => {
