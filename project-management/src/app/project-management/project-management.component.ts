@@ -38,7 +38,9 @@ export class ProjectManagementComponent implements OnInit {
     // Create an Observable that will publish a value on an interval
     const secondsCounter = interval(1000);
     const subscription = secondsCounter.subscribe(n =>
-    console.log(`It's been ${n + 1} seconds since saving!`));
+		this.timeMessage = n.toString()
+    	//console.log(`It's been ${n + 1} seconds since saving!`)
+	);
 
     const minutesCounter = interval(60000);
     const sub = minutesCounter.subscribe(n =>
@@ -64,7 +66,9 @@ export class ProjectManagementComponent implements OnInit {
     */
 
     this.projectsService.create(this.newProject).subscribe( saveProject => {
-      this.projects.push(saveProject);
+     
+      	this.projects.push(saveProject);
+  		this.messageList.push(this.timeMessage);
     })
 
     //this.projectsService.create(this.newProject).subscribe( saveProject => {
