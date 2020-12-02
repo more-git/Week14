@@ -12,11 +12,23 @@ export class TimerService {
   sendMessage(message: string): void {
     this.socket.emit('user message', message);
     // this.httpClient.post<any>(`localhost:8000/name`, {name: newName}).pipe(map(newName => new Project(newName.name)));
-    // postTime();
   }
 
   getMessages(): any {
     return this.socket.fromEvent('user message');
   }
 
+
+  startTimer(task_id: string, start: string):void {
+    this.socket.emit('timer', start, task_id);
+  }
+
+  stopTimer(task_id: string):void {
+    this.socket.emit('timer');
+  }
+
+  getTimers(): any {
+    //return this.socket.fromEvent('user message');
+  }
+ 
 }

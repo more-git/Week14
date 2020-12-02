@@ -5,16 +5,11 @@ var mongoose = require('mongoose');
 var db = mongoose.connect('mongodb://localhost/projectsdb');
 var projectSchema = require('./project_schema.js').projectSchema;
 var Projects = mongoose.model('Projects', projectSchema);
-//
-//var taskSchema = require('./task_schema.js').taskSchema;
-//var Tasks = mongoose.model('Tasks', taskSchema);
-//
-//var timerSchema = require('./timer_schema.js').timerSchema;
-//var Timer = mongoose.model('Timer', timerSchema);
-//
-//var http = require('http').createServer(app);
-//var http = require('http').Server(app);
-//var io = require('socket.io')(http)
+var taskSchema = require('./task_schema.js').taskSchema;
+var Tasks = mongoose.model('Tasks', taskSchema);
+var timerSchema = require('./timer_schema.js').timerSchema;
+var Timer = mongoose.model('Timer', timerSchema);
+
 var io = require('socket.io').listen(8001)
 var nicknames = {};
 
@@ -57,49 +52,66 @@ mongoose.connection.once('open', function(){
     })
 
     app.put('/update/*',function(req, res)  {
-        var query = Projectss.findByIdAndUpdate(req.body._id, {"name": req.body.name});
+        var query = Projects.findByIdAndUpdate(req.body._id, {"name": req.body.name});
         query.exec(function (err, doc) {
             res.status(200);
             res.send(JSON.stringify(doc));
         });
     })
 
-});
-    
 
-// Socket
-io.sockets.on('connection', function (socket) {
-    socket.on('user message', function (msg) {
+    // Socket
+    io.sockets.on('connection', function (socket) {
+        socket.on('user message', function (msg) {
         // You're going to want to include the nickname for the final project - IM project only
-        // socket.broadcast.emit('user message', socket.nickname, msg);
-        io.sockets.emit('user message', msg);
-    })
+        // socket.broadcast.emit('user message', socket.nickname, msg);        
+            io.sockets.emit('user message', msg);
+        })
 
-    socket.on('nickname', function (nick) {
-        // Instead of checking against an array you'll check against the database
-        if (nicknames[nick]) {
-            console.log("nickname exists!")
-        } else {
-            console.log("nickname added!")
-            nicknames[nick] = nick;
-            socket.nickname = nick;
+        socket.on('nickname', function (nick) {
+            // Instead of checking against an array you'll check against the database
+            if (nicknames[nick]) {
+                console.log("nickname exists!")
+            } else {
+                console.log("nickname added!")
+                nicknames[nick] = nick;
+                socket.nickname = nick;
 
             io.sockets.emit('nicknames', nicknames);
-        }
+            }
+        })
+
+        socket.on('timer', function (start, id) {
+            if (start) {
+                var taskDate = new Date();
+                taskDate = JSON.stringify(taskDate.toJSON().slice(0,19).replace('T',':'));
+                // Add the current datetime to the db
+
+                var newTask = new Tasks({
+                    name: start,
+                    project_id: id,
+                    totalTime: '0',
+                    datetime: taskDate
+                });
+                //console.log(newTask + " with id: "+ )
+                newTask.save(function (err, doc) {
+                    //response.status(200);
+                    //response.send(JSON.stringify(doc));
+                })
+                console.log('Timer has started!')
+                console.log('taskDate = ' + taskDate);
+            } else {
+                // calculate totalTime 
+                var stopDate = new Date();
+                stopDate = JSON.stringify(stopDate.toJSON().slice(0,19).replace('T',':'));
+                console.log('Timer has stopped!');
+                 console.log('stopDate = ' + stopDate);
+                // Get appropriate datetime from db
+                // Remove the datetime from the db
+            }
+        })
     })
 
-    socket.on('timer', function (start) {
-        if (start) {
-            // Add the current datetime to the db
-            console.log('Timer has started!')
-        } else {
-            console.log('Timer has stopped!')
-            // Get appropriate datetime from db
-            // Remove the datetime from the db
-        }
-    })
-})
-
-
-
+});
+    
 

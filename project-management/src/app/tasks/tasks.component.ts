@@ -4,6 +4,7 @@ import { TimerService } from "../_services/timer.service";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { Project } from "../_models/project.model";
+import { Task } from "../_models/task.model";
 import { interval } from 'rxjs';
 
 @Component({
@@ -16,10 +17,14 @@ export class TasksComponent implements OnInit {
   public newProject;
   public projects;
   public editProject = new Project();
+  public newTask;
+  public tasks;
   newMessage: string;
   messageList: string[] = [];
   taskTime: string;
+  task_id:string;
   timeMessage: string;
+  //task_id: string;
 
   constructor(
   	private projectsService: ProjectsService,
@@ -32,30 +37,16 @@ export class TasksComponent implements OnInit {
       this.projects = returnProjects.docs;
     })
 
-    /*
-    // Create an Observable that will publish a value on an interval
-    const secondsCounter = interval(1000);
-    const subscription = secondsCounter.subscribe(n =>
-		this.timeMessage = n.toString()
-    	//console.log(`It's been ${n + 1} seconds since saving!`)
-	);
-
-    const minutesCounter = interval(60000);
-    const sub = minutesCounter.subscribe(n =>
-    console.log(`It's been ${n + 1} minutes since saving!`));
-    */
-
  }
 
  
  saveProject(): void {
     this.projectsService.create(this.newProject).subscribe( saveProject => {
       	this.projects.push(saveProject);
-  		this.messageList.push(this.timeMessage);
     })
   }
 
-  // include taskID parameter
+  //startTimer(task_id): void {
   startTimer(): void {
     // Create an Observable that will publish a value on an interval
     const secondsCounter = interval(1000);
@@ -67,14 +58,18 @@ export class TasksComponent implements OnInit {
     const sub = minutesCounter.subscribe(n =>
     console.log(`It's been ${n + 1} minutes since saving!`));
 
+    this.task_id = '1234';//
+    this.timerService.startTimer(this.task_id, "start");
+
   }
 
-  // include taskID parameter
+  //stopTimer(task_id): void {
   stopTimer(): void {
     this.timerService.sendMessage((this.timeMessage));
     this.messageList.push(this.timeMessage);
     this.taskTime = this.timeMessage;
-
+    this.task_id = '1234';
+    this.timerService.stopTimer(this.task_id);
   }
 
 

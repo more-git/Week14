@@ -35,57 +35,20 @@ export class ProjectManagementComponent implements OnInit {
       this.projects = returnProjects.docs;
     })
 
-    // Create an Observable that will publish a value on an interval
-    const secondsCounter = interval(1000);
-    const subscription = secondsCounter.subscribe(n =>
-		this.timeMessage = n.toString()
-    	//console.log(`It's been ${n + 1} seconds since saving!`)
-	);
-
-    const minutesCounter = interval(60000);
-    const sub = minutesCounter.subscribe(n =>
-    console.log(`It's been ${n + 1} minutes since saving!`));
-
   }
 
   saveProject(): void {
-    /*
-    // Create an Observable that will publish a value on an interval
-    const secondsCounter = interval(1000);
-    const subscription = secondsCounter.subscribe(n =>
-    console.log(`It's been ${n + 1} seconds since saving!`));
-
-    const minutesCounter = interval(60000);
-    const sub = minutesCounter.subscribe(n =>
-    console.log(`It's been ${n + 1} minutes since saving!`));
-
-    //sendMessage(): void {}
-    this.timerService.sendMessage((this.timeMessage));
-    //this.timerService.sendMessage((this.newMessage));
-    this.newMessage = '';
-    */
-
     this.projectsService.create(this.newProject).subscribe( saveProject => {
-     
+
       	this.projects.push(saveProject);
-  		this.messageList.push(this.timeMessage);
+
     })
 
-    //this.projectsService.create(this.newProject).subscribe( saveProject => {
-    //  this.projects.push(saveProject);
-    //})
   }
 
   startTimer(): void {
-
-    //sendMessage(): void {}
     this.timerService.sendMessage((this.timeMessage));
-    //this.timerService.sendMessage((this.newMessage));
     this.newMessage = '';
-    
-    //this.projectsService.create(this.timeMessage).subscribe( startTimer => {
-    //  this.projects.push(this.timeMessage);
-    //})
   }
 
 

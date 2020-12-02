@@ -1,9 +1,7 @@
 export class Project {
   name: string;
 
-
-  // start: date;
-  // end: date;
+  // totalTime
 
 
   constructor(name: string = '') {
