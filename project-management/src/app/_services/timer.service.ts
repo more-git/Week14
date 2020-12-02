@@ -11,7 +11,6 @@ export class TimerService {
 
   sendMessage(message: string): void {
     this.socket.emit('user message', message);
-    // this.httpClient.post<any>(`localhost:8000/name`, {name: newName}).pipe(map(newName => new Project(newName.name)));
   }
 
   getMessages(): any {
@@ -28,7 +27,7 @@ export class TimerService {
   }
 
   getTimers(): any {
-    //return this.socket.fromEvent('user message');
+    //return this.socket.fromEvent('timer');
   }
  
 }

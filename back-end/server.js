@@ -63,13 +63,12 @@ mongoose.connection.once('open', function(){
     // Socket
     io.sockets.on('connection', function (socket) {
         socket.on('user message', function (msg) {
-        // You're going to want to include the nickname for the final project - IM project only
-        // socket.broadcast.emit('user message', socket.nickname, msg);        
+        // You're going to want to include the nickname - IM project only
             io.sockets.emit('user message', msg);
         })
 
         socket.on('nickname', function (nick) {
-            // Instead of checking against an array you'll check against the database
+            // Instead of checking against an array you'll check against the db 
             if (nicknames[nick]) {
                 console.log("nickname exists!")
             } else {
@@ -93,10 +92,7 @@ mongoose.connection.once('open', function(){
                     totalTime: '0',
                     datetime: taskDate
                 });
-                //console.log(newTask + " with id: "+ )
                 newTask.save(function (err, doc) {
-                    //response.status(200);
-                    //response.send(JSON.stringify(doc));
                 })
                 console.log('Timer has started!')
                 console.log('taskDate = ' + taskDate);
@@ -106,8 +102,6 @@ mongoose.connection.once('open', function(){
                 stopDate = JSON.stringify(stopDate.toJSON().slice(0,19).replace('T',':'));
                 console.log('Timer has stopped!');
                  console.log('stopDate = ' + stopDate);
-                // Get appropriate datetime from db
-                // Remove the datetime from the db
             }
         })
     })
