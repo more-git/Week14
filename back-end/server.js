@@ -31,8 +31,32 @@ mongoose.connection.once('open', function(){
         var newProject = new Projects({
             name: request.body.name
         });
-        //console.log(newProject)
+        console.log(newProject)
         newProject.save(function (err, doc) {
+            response.status(200);
+            response.send(JSON.stringify(doc));
+        })
+    })
+
+    app.get('/tasks', function (request, response) {
+        var query = Tasks.find();
+        query.exec(function (err, docss){
+            response.status(200);
+            response.send(JSON.stringify({docss}));
+        });
+    })
+
+    app.post('/task', function(request, response){
+        var taskDate = new Date();
+        taskDate = JSON.stringify(taskDate.toJSON().slice(0,19).replace('T',':'));
+        var newTask = new Tasks({
+            name: request.body.name,
+            project_id: request.body.id,
+            totalTime: '0',
+            datetime: taskDate
+        });
+        console.log(newTask)
+        newTask.save(function (err, doc) {
             response.status(200);
             response.send(JSON.stringify(doc));
         })

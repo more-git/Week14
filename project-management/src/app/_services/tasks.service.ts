@@ -11,11 +11,11 @@ export class TasksService {
   constructor(private httpClient: HttpClient) {}
 
   getTasks(): Observable<any>{
-    return this.httpClient.get<any>(`${environment.apiUrl}/names`);
+    return this.httpClient.get<any>(`${environment.apiUrl}/tasks`);
   }
 
-  createTask(){
-
+  create(newTask, projectId){
+    return this.httpClient.post<any>(`${environment.apiUrl}/task`, {task: newTask, project_id: projectId})
   }
 
 

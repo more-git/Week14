@@ -11,6 +11,7 @@ import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { TasksComponent } from './tasks/tasks.component';
+import { TaskComponent } from './task/task.component';
 const config: SocketIoConfig = { url: 'http://localhost:8001', options: {} };
 
 
@@ -19,7 +20,8 @@ const config: SocketIoConfig = { url: 'http://localhost:8001', options: {} };
   declarations: [
     AppComponent,
     ProjectManagementComponent,
-    TasksComponent
+    TasksComponent,
+    TaskComponent
   ],
   imports: [
     BrowserModule,
