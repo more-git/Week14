@@ -73,6 +73,7 @@ mongoose.connection.once('open', function(){
                 res.send(JSON.stringify({}));
             }
         );
+        // delete timer with task_id == req.params[0]
     })
 
     app.put('/update/*',function(req, res)  {
@@ -104,10 +105,22 @@ mongoose.connection.once('open', function(){
             }
         })
 
+        var startDate;
         socket.on('timer', function (start, id) {
+            if (!startDate) {
+                startDate= new Date();
+            }
+            // if ((start)type == 'start')
             if (start) {
                 var taskDate = new Date();
-                taskDate = JSON.stringify(taskDate.toJSON().slice(0,19).replace('T',':'));
+                startDate = new Date(); //use task _id
+                
+                var timer = new Timer({
+                    task_id: id,
+                    datetime: taskDate
+                });
+                timer.save(function(err, doc) {
+                })
                 // Add the current datetime to the db
 
                 var newTask = new Tasks({
@@ -123,9 +136,27 @@ mongoose.connection.once('open', function(){
             } else {
                 // calculate totalTime 
                 var stopDate = new Date();
-                stopDate = JSON.stringify(stopDate.toJSON().slice(0,19).replace('T',':'));
-                console.log('Timer has stopped!');
-                 console.log('stopDate = ' + stopDate);
+
+                // update totalTime
+                /*Tasks.findByIdAndUpdate(id, {"project_id": id}).exec(function (err, doc) {
+                });*/ 
+                var taskStopped = Tasks.find({project_id: id});
+                var stoppedTimer = Timer.find({task_id: id});
+
+                if (startDate) {
+                    var diff = stopDate -  startDate;
+                    //var diff = stopDate -  stoppedTimer.datetime;
+
+                    console.log('diff (milliseconds) '+diff);
+                    diff /= 60000;
+                    console.log('diff (minutes)'+diff);
+                    //taskStopped.totalTime = Math.abs(Math.round(diff)).toString();
+                }
+
+                // remove timer
+                /*Timer.deleteOne({task_id: id}).exec(function (err, doc) {
+                })*/
+
             }
         })
     })
