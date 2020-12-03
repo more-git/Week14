@@ -15,7 +15,7 @@ export class TasksService {
   }
 
   create(newTask, projectId){
-    return this.httpClient.post<any>(`${environment.apiUrl}/task`, {task: newTask, project_id: projectId})
+    return this.httpClient.post<any>(`${environment.apiUrl}/task`, {name: newTask, project_id: projectId})
   }
 
 

@@ -94,7 +94,7 @@ class TaskComponent {
         });
     }
     saveTask() {
-        this.tasksService.create(this.newTask).subscribe(saveTask => {
+        this.tasksService.create(this.newTask, this.projectId).subscribe(saveTask => {
             this.tasks.push(saveTask);
         });
     }
@@ -532,8 +532,8 @@ class TasksService {
     getTasks() {
         return this.httpClient.get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].apiUrl}/tasks`);
     }
-    create(newTask) {
-        return this.httpClient.post(`${_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].apiUrl}/task`, { task: newTask });
+    create(newTask, projectId) {
+        return this.httpClient.post(`${_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].apiUrl}/task`, { name: newTask, project_id: projectId });
     }
 }
 TasksService.ɵfac = function TasksService_Factory(t) { return new (t || TasksService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"])); };

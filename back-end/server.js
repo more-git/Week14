@@ -51,7 +51,7 @@ mongoose.connection.once('open', function(){
         taskDate = JSON.stringify(taskDate.toJSON().slice(0,19).replace('T',':'));
         var newTask = new Tasks({
             name: request.body.name,
-            project_id: request.body.id,
+            project_id: request.body.project_id,
             totalTime: '0',
             datetime: taskDate
         });
