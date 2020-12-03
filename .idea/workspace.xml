@@ -19,13 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e58d4ae5-6dc2-44d8-8ac4-cff5cd1f12b0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project-management/dist/project-management/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/project-management/dist/project-management/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project-management/dist/project-management/main.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/project-management/dist/project-management/main.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project-management/src/app/_services/tasks.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/project-management/src/app/_services/tasks.service.ts" afterDir="false" />
-    </list>
+    <list default="true" id="e58d4ae5-6dc2-44d8-8ac4-cff5cd1f12b0" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
