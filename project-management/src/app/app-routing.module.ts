@@ -7,6 +7,8 @@ import {TaskComponent} from "./task/task.component";
 const routes: Routes = [
   {path: 'project-management', component: ProjectManagementComponent},
   {path: 'project-management/tasks', component: TasksComponent},
+
+  {path : 'project-management/task', component: TaskComponent},
   {path : 'task', component: TaskComponent}
 ];
 

@@ -11,23 +11,25 @@ import { map } from "rxjs/operators";
   providedIn: 'root'
 })
 export class ProjectsService {
+  public projectId;
 
-  constructor(private socket: Socket, private httpClient: HttpClient) { }
+  constructor(private socket: Socket, private httpClient: HttpClient) {
+  }
 
   getAll(): Observable<any> {
     return this.httpClient.get<any>(`${environment.apiUrl}/names`);
   }
 
-  create( newName ): Observable<Project> {
+  create(newName): Observable<Project> {
     return this.httpClient.post<any>(`${environment.apiUrl}/name`, {name: newName})
       .pipe(map(newName => new Project(newName.name)));
   }
 
-  destroy( name ): Observable<any> {
+  destroy(name): Observable<any> {
     return this.httpClient.delete(`${environment.apiUrl}/name/${name._id}`);
   }
 
-  removeProject( arrayNames, nameToRemove ): any{
+  removeProject(arrayNames, nameToRemove): any {
     for (let i = 0; i <= arrayNames.length; i++) {
       if (arrayNames[i]._id === nameToRemove._id) {
         arrayNames.splice(i, 1);
@@ -36,13 +38,13 @@ export class ProjectsService {
     }
   }
 
-  updateProject( nameToUpdate ): any{
-    let options = { name: nameToUpdate.name, _id: nameToUpdate._id };
-    return this.httpClient.request<any>('PUT', `${environment.apiUrl}/update/`, { body: options });
+  updateProject(nameToUpdate): any {
+    let options = {name: nameToUpdate.name, _id: nameToUpdate._id};
+    return this.httpClient.request<any>('PUT', `${environment.apiUrl}/update/`, {body: options});
     // return this.httpClient.request<any>('PUT', `${environment.apiUrl}/update/${nameToUpdate._id}/${nameToUpdate.name}`);
   }
 
-  editProject( arrayNames, nameToEdit ): any{
+  editProject(arrayNames, nameToEdit): any {
     for (let i = 0; i <= arrayNames.length; i++) {
       if (arrayNames[i]._id === nameToEdit._id) {
         arrayNames[i].name = nameToEdit.name;
@@ -50,4 +52,11 @@ export class ProjectsService {
       }
     }
   }
+
+
+  sendId(id): any {
+     this.projectId = id;
+     alert(id);
+  }
+
 }

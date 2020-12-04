@@ -38,7 +38,7 @@ mongoose.connection.once('open', function(){
         })
     })
 
-    app.get('/tasks', function (request, response) {
+    app.get('/tasks/*', function (request, response) {
         var query = Tasks.find();
         query.exec(function (err, docss){
             response.status(200);

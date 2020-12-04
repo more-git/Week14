@@ -5,6 +5,12 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { Project } from "../_models/project.model";
 
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+
+
+
 import { interval } from 'rxjs';
 
 
@@ -19,15 +25,19 @@ export class ProjectManagementComponent implements OnInit {
   public newProject;
   public projects;
   public editProject = new Project();
+  public newProjectId;
   //
   newMessage: string;
   messageList: string[] = [];
   timeMessage: string;
 
+  parentMessage = "message from parent"
+
   constructor(
     private projectsService: ProjectsService,
     private modalService: NgbModal,
-    private timerService: TimerService
+    private timerService: TimerService,
+
   ) { }
 
   ngOnInit(): void {
@@ -75,5 +85,9 @@ export class ProjectManagementComponent implements OnInit {
       console.log(error);
     })
 
+  }
+
+  saveId(){
+    this.projectsService.sendId(this.newProject._id);
   }
 }
