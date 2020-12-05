@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpParams, HttpClient } from '@angular/common/http';
 import { Observable } from "rxjs";
 import { Socket } from "ngx-socket-io";
 import { environment } from "../../environments/environment";
@@ -50,4 +50,16 @@ export class ProjectsService {
       }
     }
   }
+
+  getTimers(): Observable<any> {
+    return this.httpClient.get<any>(`${environment.apiUrl}/time`);
+  }
+
+  getDiff(name): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('task_name', name);
+    console.log("getDiff(name) = "+ name);
+    return this.httpClient.get<any>(`${environment.apiUrl}/diff`, {params: params});
+  }
+
 }
