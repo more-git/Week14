@@ -40,9 +40,9 @@ mongoose.connection.once('open', function(){
 
     app.get('/tasks', function (request, response) {
         var query = Tasks.find();
-        query.exec(function (err, docss){
+        query.exec(function (err, docs){
             response.status(200);
-            response.send(JSON.stringify({docss}));
+            response.send(JSON.stringify({docs}));
         });
     })
 
@@ -85,6 +85,72 @@ mongoose.connection.once('open', function(){
     })
 
 
+    app.get('/time', function (request, response) {
+        console.log("app.get: '/time'");
+        var query = Timer.find();
+        query.exec(function (err, docs){
+            console.log("getTimer = "+docs);
+            response.status(200);
+            response.send(JSON.stringify({docs}));
+        });
+    })
+
+    app.put('/updateTime/*',function(req, res)  {
+        var query = Timer.findByIdAndUpdate(req.body._id, {"datetime": req.body.name});
+        query.exec(function (err, doc) {
+            res.status(200);
+            res.send(JSON.stringify(doc));
+        });
+    })
+
+     app.get('/diff', function (request, response) {
+        //console.log("getDiff: request.body.task_name = "+request.body.task_name);
+        //console.log("getDiff: request.params.task_name = "+request.params.task_name);
+        //console.log("getDiff: request.params = "+request.params);
+        //console.log("getDiff: request = "+request);
+
+
+
+
+        var query = Timer.findOne({task_name: request.body.task_name});
+        query.exec(function (err, docs){
+            console.log("getDiff = "+docs);
+            response.status(200);
+            response.send(JSON.stringify({docs}));
+        });
+    })
+
+    app.put('/updateTimer/*',function(req, res)  {
+
+        var stopDate = new Date();
+        var startDate;
+
+        var query = Timer.findOne({task_name: req.body.task_name});
+
+        query.exec(function (err, docs){
+            console.log("updateTimer = "+docs);
+            console.log("updateTimer = "+docs.datetime);
+            startDate = docs.datetime;
+
+            // calculate totalTime
+            var diff = stopDate -  startDate;
+            console.log('diff (milliseconds) '+diff);
+            diff /= 60000;
+            console.log('diff (minutes)'+diff);
+            res.status(200);
+            //res.send(JSON.stringify({docs}));
+            res.send(diff.toString());// send totalTime(minutes)
+        });
+        
+        /*
+        var query = Timer.findByIdAndUpdate(req.body._id, {"datetime": req.body.name});
+        query.exec(function (err, doc) {
+            res.status(200);
+            res.send(JSON.stringify(doc));
+        });*/
+    }) 
+
+
     // Socket
     io.sockets.on('connection', function (socket) {
         socket.on('user message', function (msg) {
@@ -105,59 +171,80 @@ mongoose.connection.once('open', function(){
             }
         })
 
+
+        socket.on('startTimer', function (taskName) {
+            console.log("start("+taskName+")");
+            var startDate = new Date();
+            var taskStarted = Projects.find({name: taskName}).exec(function (err, docs){
+
+                // if (docs)
+                 var timer = new Timer({
+                    task_id: docs._id, 
+                    datetime: startDate,
+                    task_name: taskName
+                });
+                timer.save(function(err, doc) {
+                })
+                console.log('docs = ' + docs);
+                io.emit("time",docs);
+
+            });
+        })  
+
+        socket.on('stopTimer', function (name) {
+            console.log("stop("+name+")"); 
+            var stopDate = new Date();
+
+            var timer = Timer.findOne({task_name: name}).exec(function (err, docs){
+                
+                console.log('stopDate = ' + stopDate);
+                var startDate = docs.datetime;
+                if (startDate) {
+                    console.log('startDate = ' + startDate);
+                    var diff = stopDate -  startDate;
+                    console.log('diff (milliseconds) '+diff);
+                    diff /= 60000;
+                    console.log('diff (minutes)'+diff);
+                } 
+            }); 
+            // update task with task_name == name
+            // remove timer associated with task_id
+        })   
+
+        socket.on('getTimers', () => {
+            let ms = 'max'
+            io.emit("time",ms);
+        });
+
+
         var startDate;
         socket.on('timer', function (start, id) {
             if (!startDate) {
                 startDate= new Date();
             }
-            // if ((start)type == 'start')
+
             if (start) {
                 var taskDate = new Date();
-                startDate = new Date(); //use task _id
-                
-                var timer = new Timer({
-                    task_id: id,
-                    datetime: taskDate
-                });
-                timer.save(function(err, doc) {
-                })
+                startDate = new Date();
                 // Add the current datetime to the db
 
-                var newTask = new Tasks({
-                    name: start,
-                    project_id: id,
-                    totalTime: '0',
-                    datetime: taskDate
-                });
-                newTask.save(function (err, doc) {
-                })
-                console.log('Timer has started!')
-                console.log('taskDate = ' + taskDate);
             } else {
                 // calculate totalTime 
                 var stopDate = new Date();
 
                 // update totalTime
-                /*Tasks.findByIdAndUpdate(id, {"project_id": id}).exec(function (err, doc) {
-                });*/ 
                 var taskStopped = Tasks.find({project_id: id});
                 var stoppedTimer = Timer.find({task_id: id});
 
                 if (startDate) {
-                    var diff = stopDate -  startDate;
-                    //var diff = stopDate -  stoppedTimer.datetime;
-
-                    console.log('diff (milliseconds) '+diff);
-                    diff /= 60000;
-                    console.log('diff (minutes)'+diff);
-                    //taskStopped.totalTime = Math.abs(Math.round(diff)).toString();
+                    // update Timer.datetime
                 }
 
                 // remove timer
-                /*Timer.deleteOne({task_id: id}).exec(function (err, doc) {
-                })*/
+                //Timer.deleteOne({task_id: id}).exec(function (err, doc) {})
 
             }
+
         })
     })
 
