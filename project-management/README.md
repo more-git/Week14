@@ -21,7 +21,7 @@
 
 • Generate services for the timer and project.
 
-• Generate models for the task, timer and project.
+• Generate models for the task, timer, and project.
 
 
 # Project Management Application
