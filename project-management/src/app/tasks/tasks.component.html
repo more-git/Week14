@@ -3,12 +3,12 @@
 <button (click)="saveTask()">Save</button>
 <div *ngFor="let task of tasks">
   <div class="row">
-    <h4>{{task.name}}</h4> 
-    <button (click)="startTask(task)">Start</button>
-    <button (click)="stopTask(task)">Stop</button>
-    
+
+    <h4>{{task.name}}  
+      <button class = "startTask" (click)="startTask(task)">Start</button>
+      <button class = "stopTask" (click)="stopTask(task)">Stop</button>
+    </h4>     
     <h4>Total Time: {{ task.totalTime }}</h4>
-    <!--<h4>Total Time({{task._id}}): {{ task.totalTime }}</h4>-->
   </div>
 </div>
 
