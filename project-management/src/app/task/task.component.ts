@@ -23,7 +23,7 @@ export class TaskComponent implements OnInit {
 
   ngOnInit(): void {
     this.tasksService.getTasks().subscribe(returnTasks => {
-      this.tasks = returnTasks.docss;
+      this.tasks = returnTasks.docs;
     })
   }
 
