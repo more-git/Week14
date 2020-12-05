@@ -1,7 +1,9 @@
 <input [(ngModel)]="newProject">
 <button (click)="saveProject()">Save</button>
 
-<h3>Projects!</h3>
+<h3>Tasks!</h3> 
+<span>Total Time: {{taskTime}} Minutes</span>
+
 <div *ngFor="let project of projects">
   <div class="row">
     <h4>{{ project.name }}</h4>
@@ -14,9 +16,12 @@
             </svg>
           </button>
 
-    <button (click)="startTimer()">Start</button>
-    <button (click)="stopTimer()">Stop</button>
-    <span>{{taskTime}}</span>
+    <!--<button (click)="startTimer()">Start</button>-->
+    <!--<button (click)="stopTimer()">Stop</button>-->
+    <button (click)="start(project)">Start</button>
+    <button (click)="stop(project)">Stop</button>
+    
+    <h4>Total Time (saved): {{ project.totalTime }}</h4>
 
 
   </div>

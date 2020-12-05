@@ -25,6 +25,7 @@ export class TasksComponent implements OnInit {
   task_id:string;
   timeMessage: string;
   //task_id: string;
+  //timers: string[] = [];
 
   constructor(
   	private projectsService: ProjectsService,
@@ -35,6 +36,10 @@ export class TasksComponent implements OnInit {
   ngOnInit(): void {
   	this.projectsService.getAll().subscribe(returnProjects => {
       this.projects = returnProjects.docs;
+    })
+
+    this.timerService.getTimers().subscribe(returnTimers => {
+      console.log("timerService.getTimers(): returnTimers.docs = "+returnTimers.docs.toString());
     })
 
  }
@@ -70,6 +75,63 @@ export class TasksComponent implements OnInit {
     this.taskTime = this.timeMessage;
     this.task_id = '1234';
     this.timerService.stopTimer(this.task_id);
+  }
+
+  //startTimer(task_id): void {
+  start(project): void {
+
+    this.timerService.start(project.name);
+
+    // Create an Observable that will publish a value on an interval
+    const secondsCounter = interval(1000);
+    const subscription = secondsCounter.subscribe(n =>
+      this.timeMessage = n.toString()
+    );
+
+
+    
+    console.log("start("+project.name+")");
+
+
+    const minutesCounter = interval(60000);
+    const sub = minutesCounter.subscribe(n =>
+    console.log(`It's been ${n + 1} minutes since saving!`));
+
+    //this.task_id = '1234';//
+    //this.timerService.startTimer(this.task_id, "start");
+
+  }
+
+  //stopTimer(task_id): void {
+  stop(project): void {
+    this.timerService.stop(project.name);
+    console.log("stop("+project.name+")");
+
+    this.timerService.sendMessage((this.timeMessage));
+    this.messageList.push(this.timeMessage);
+    this.taskTime = this.timeMessage;
+    this.task_id = '1234';
+    this.timerService.stopTimer(this.task_id);
+    //this.timerService.stop(project.name);
+    
+
+    //get time form database.
+    //this.timerService.getTime();
+    //this.projectsService.getTimers();
+
+
+    /*
+    this.timerService.getDiff(project.name).subscribe(returnDiff => {
+      if (returnDiff) console.log("timerService.getDiff(): returnDiff.docs = "+returnDiff.docs);
+    })*/
+
+    //project.totalTime = this.taskTime;
+
+    this.timerService.updateTimer(project.name).subscribe(totalTime => {
+      project.totalTime = totalTime;
+      //if (totalTime) console.log("totalTime = "+totalTime);
+    })
+
   }
 
 
