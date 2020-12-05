@@ -104,13 +104,6 @@ mongoose.connection.once('open', function(){
     })
 
      app.get('/diff', function (request, response) {
-        //console.log("getDiff: request.body.task_name = "+request.body.task_name);
-        //console.log("getDiff: request.params.task_name = "+request.params.task_name);
-        //console.log("getDiff: request.params = "+request.params);
-        //console.log("getDiff: request = "+request);
-
-
-
 
         var query = Timer.findOne({task_name: request.body.task_name});
         query.exec(function (err, docs){
@@ -118,6 +111,7 @@ mongoose.connection.once('open', function(){
             response.status(200);
             response.send(JSON.stringify({docs}));
         });
+
     })
 
     app.put('/updateTimer/*',function(req, res)  {
@@ -128,17 +122,13 @@ mongoose.connection.once('open', function(){
         var query = Timer.findOne({task_name: req.body.task_name});
 
         query.exec(function (err, docs){
-            console.log("updateTimer = "+docs);
-            console.log("updateTimer = "+docs.datetime);
             startDate = docs.datetime;
-
             // calculate totalTime
             var diff = stopDate -  startDate;
             console.log('diff (milliseconds) '+diff);
             diff /= 60000;
             console.log('diff (minutes)'+diff);
             res.status(200);
-            //res.send(JSON.stringify({docs}));
             res.send(diff.toString());// send totalTime(minutes)
         });
         
@@ -148,6 +138,7 @@ mongoose.connection.once('open', function(){
             res.status(200);
             res.send(JSON.stringify(doc));
         });*/
+
     }) 
 
 
@@ -177,7 +168,6 @@ mongoose.connection.once('open', function(){
             var startDate = new Date();
             var taskStarted = Projects.find({name: taskName}).exec(function (err, docs){
 
-                // if (docs)
                  var timer = new Timer({
                     task_id: docs._id, 
                     datetime: startDate,
