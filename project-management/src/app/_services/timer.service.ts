@@ -40,6 +40,13 @@ export class TimerService {
     this.getTime();
   }
 
+  startTask(name: string):void {
+    this.socket.emit('startTask', name);
+  }
+
+  stopTask(name: string):void {
+    this.socket.emit('stopTask', name);
+  }
 
   getTime(): Observable<any> {
     return this.httpClient.get<any>(`${environment.apiUrl}/time`);
@@ -65,8 +72,14 @@ export class TimerService {
   updateTimer(name): Observable<any> {
     let options = { task_name: name };
     return this.httpClient.request<any>('PUT', `${environment.apiUrl}/updateTimer/`, { body: options });
-    //return this.httpClient.get<any>(`${environment.apiUrl}/updateTimer`, { body: options });
   }
+
   
+  updateTotalTime(task_id): Observable<any> {
+
+    let options = { task_id: task_id };
+    // server side: create PUT('/updateTotalTime')
+    return this.httpClient.request<any>('PUT', `${environment.apiUrl}/updateTotalTime/`, { body: options });
+  }
 
 }

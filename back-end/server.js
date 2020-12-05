@@ -142,6 +142,44 @@ mongoose.connection.once('open', function(){
     }) 
 
 
+    app.put('/updateTotalTime/*',function(req, res)  {
+
+        var stopDate = new Date();
+        var startDate;
+
+        var diff = 0;
+
+        var query = Tasks.findOne({_id: req.body.task_id});
+        query.exec(function (err, docs){
+            startDate = docs.datetime;
+            // calculate totalTime
+            diff = stopDate -  startDate;
+            console.log('diff (milliseconds) '+diff);
+            diff /= 60000;
+            console.log('diff (minutes)'+diff);
+            res.status(200);
+            res.send(diff.toString());// send totalTime(minutes)
+
+            /**/
+            var query = Tasks.findByIdAndUpdate(req.body.task_id, {"totalTime": diff.toString()});
+            query.exec(function (err, doc) {
+                res.status(200);
+                res.send(JSON.stringify(doc));
+            });
+            /**/
+        });
+
+        /*
+        var query = Tasks.findByIdAndUpdate(req.body._id, {"totalTime": diff.toString()});
+        query.exec(function (err, doc) {
+            res.status(200);
+            res.send(JSON.stringify(doc));
+        });*/
+        
+
+    }) 
+
+
     // Socket
     io.sockets.on('connection', function (socket) {
         socket.on('user message', function (msg) {
@@ -236,6 +274,52 @@ mongoose.connection.once('open', function(){
             }
 
         })
+
+
+ 
+
+
+
+
+
+        // tasksComponent
+        socket.on('startTask', function (taskName) {
+            console.log("start("+taskName+")");
+            var startDate = new Date();
+            var taskStarted = Tasks.find({name: taskName}).exec(function (err, docs){
+
+                 var timer = new Timer({
+                    task_id: docs._id, 
+                    datetime: startDate,
+                    task_name: taskName
+                });
+                timer.save(function(err, doc) {
+                })
+                console.log('docs = ' + docs);
+                io.emit("time",docs);
+
+            });
+        })  
+
+        socket.on('stopTask', function (name) {
+            console.log("stop("+name+")"); 
+            var stopDate = new Date();
+
+            var timer = Timer.findOne({task_name: name}).exec(function (err, docs){
+                
+                console.log('stopDate = ' + stopDate);
+                var startDate = docs.datetime;
+                if (startDate) {
+                    console.log('startDate = ' + startDate);
+                    var diff = stopDate -  startDate;
+                    console.log('diff (milliseconds) '+diff);
+                    diff /= 60000;
+                    console.log('diff (minutes)'+diff);
+                } 
+            }); 
+            // update task with task_name == name
+            // remove timer associated with task_id
+        }) 
     })
 
 });
