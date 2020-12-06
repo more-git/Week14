@@ -53,14 +53,14 @@ export class TaskComponent implements OnInit {
       console.log(error);
     })
   }
-  
+
   startTask(task): void {
     console.log("start("+task.name+")");
     this.timerService.startTask(task.name);
   }
 
   stopTask(task): void {
-    
+
     console.log("stop("+task.name+")");
     console.log("task_id = "+task.task_id);
     this.timerService.stopTask(task.name);

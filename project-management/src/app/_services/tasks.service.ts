@@ -46,7 +46,6 @@ export class TasksService {
         i--;
       }
     }
-    alert(len + "   " +arrayTasks[0].project_id +  "   " + projectIdToKeep);
     return arrayTasks;
 
 
