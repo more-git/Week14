@@ -9,12 +9,12 @@ const routes: Routes = [
   {path: 'project-management/tasks', component: TasksComponent},
   {path: 'project-management/task', component: TaskComponent},
   {path: 'project-management/task/:id', component: TaskComponent},
-
+  {path : 'tasks', component: TaskComponent},
   {path : 'task', component: TaskComponent},
   {
         path: 'project-management/task',
         component: TaskComponent,
-     
+
         children: [
             { path: 'task/:id', component: TaskComponent }
             //{ path: ':id', component: TaskComponent},

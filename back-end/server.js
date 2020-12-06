@@ -76,6 +76,15 @@ mongoose.connection.once('open', function(){
         // delete timer with task_id == req.params[0]
     })
 
+    app.delete('/task/*', function (req, res){
+        query = Tasks.deleteOne({'_id': req.params[0]});
+        query.exec(function (err) {
+                res.status(200);
+                res.send(JSON.stringify({}));
+            }
+        );
+    })
+
     app.put('/update/*',function(req, res)  {
         var query = Projects.findByIdAndUpdate(req.body._id, {"name": req.body.name});
         query.exec(function (err, doc) {

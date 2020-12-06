@@ -15,8 +15,10 @@ import {switchMap } from 'rxjs/operators';
 export class TaskComponent implements OnInit {
   public newTask;
   public tasks;
+
   public projectId;
   //public project;
+
 
   constructor(
     private tasksService: TasksService,
@@ -26,17 +28,22 @@ export class TaskComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.tasksService.getTasks().subscribe(returnTasks => {
-      this.tasks = returnTasks.docs;
-    })
 
     this.projectId = this.route.snapshot.params['id'];
+
+    this.tasksService.getTasks().subscribe(returnTasks => {
+      this.tasks = returnTasks.docs;
+      this.tasksService.displayProjectTasks(this.tasks, this.projectId);
+    })
+
 
     console.log("projectId = "+ this.projectId);
     //if (this.projectId) {
     //        this.title = 'Edit Product';
     //        this.projectService.getById(this.projectId).subscribe(x => this.project = x);
     //    }
+    
+
   }
 
   saveTask(){
@@ -44,5 +51,16 @@ export class TaskComponent implements OnInit {
       this.tasks.push(saveTask);
     })
   }
+
+
+
+  deleteTask(taskToDelete): void {
+    this.tasksService.destroy(taskToDelete).subscribe(success => {
+      this.tasks = this.tasksService.removeTasks(this.tasks, taskToDelete);
+    }, error => {
+      console.log(error);
+    })
+  }
+
 
 }
