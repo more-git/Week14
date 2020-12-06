@@ -6,6 +6,7 @@ import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { Project } from "../_models/project.model";
 
 import { interval } from 'rxjs';
+import {Router} from "@angular/router";
 
 
 
@@ -22,7 +23,7 @@ export class ProjectManagementComponent implements OnInit {
   newMessage: string;
   messageList: string[] = [];
   timeMessage: string;
-
+  mySubscription: any;
   constructor(
     private projectsService: ProjectsService,
     private modalService: NgbModal,
@@ -36,10 +37,17 @@ export class ProjectManagementComponent implements OnInit {
 
   }
 
+  ngOnDestroy() {
+    if (this.mySubscription) {
+      this.mySubscription.unsubscribe();
+    }
+  }
+
   saveProject(): void {
 
     this.projectsService.create(this.newProject).subscribe( saveProject => {
       	this.projects.push(saveProject);
+      	this.ngOnInit();
     })
 
   }
@@ -74,4 +82,6 @@ export class ProjectManagementComponent implements OnInit {
     })
 
   }
+
+
 }

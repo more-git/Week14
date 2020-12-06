@@ -21,14 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e58d4ae5-6dc2-44d8-8ac4-cff5cd1f12b0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/project_schema.js" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/project_schema.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project-management/dist/project-management/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/project-management/dist/project-management/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project-management/dist/project-management/main.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/project-management/dist/project-management/main.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project-management/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/project-management/src/app/app.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project-management/src/app/project-management/project-management.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/project-management/src/app/project-management/project-management.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project-management/src/app/project-management/project-management.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/project-management/src/app/project-management/project-management.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project-management/src/app/project-management/project-management.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/project-management/src/app/project-management/project-management.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project-management/src/app/task/task.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/project-management/src/app/task/task.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,9 +126,9 @@
       <screen x="1920" y="0" width="1366" height="708" />
     </state>
     <state x="2305" y="128" width="1083" height="715" key="dock-window-1/1920.0.1366.708/0.0.1280.680@1920.0.1366.708" timestamp="1606890130825" />
-    <state x="285" y="-13" width="1058" height="542" key="dock-window-2" timestamp="1607296906876">
+    <state x="285" y="-13" width="1058" height="542" maximized="true" key="dock-window-2" timestamp="1607297292434">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="285" y="-13" width="1058" height="542" key="dock-window-2/1920.0.1366.708/0.0.1280.680@1920.0.1366.708" timestamp="1607296906876" />
+    <state x="285" y="-13" width="1058" height="542" maximized="true" key="dock-window-2/1920.0.1366.708/0.0.1280.680@1920.0.1366.708" timestamp="1607297292434" />
   </component>
 </project>

@@ -828,9 +828,15 @@ class ProjectManagementComponent {
             this.projects = returnProjects.docs;
         });
     }
+    ngOnDestroy() {
+        if (this.mySubscription) {
+            this.mySubscription.unsubscribe();
+        }
+    }
     saveProject() {
         this.projectsService.create(this.newProject).subscribe(saveProject => {
             this.projects.push(saveProject);
+            this.ngOnInit();
         });
     }
     startTimer() {
