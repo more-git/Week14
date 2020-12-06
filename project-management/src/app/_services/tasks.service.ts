@@ -14,24 +14,23 @@ export class TasksService {
 
 
   getTasks(): Observable<any> {
-    return this.httpClient.get<any>(`${environment.apiUrl}/tasks`);
-
+    return this.httpClient.get<any>(`${environment.apiUrl}/tasks/`);
   }
 
-  //getTasks(id): Observable<any>{
-    //return this.httpClient.get<any>(`${environment.apiUrl}/tasks/${id}`);
-  //}
+  getProjectTasks(id): Observable<any> {
+    return this.httpClient.get<any>(`${environment.apiUrl}/tasks/${id}`);
+  }
 
   create(newTask, projectId){
     return this.httpClient.post<any>(`${environment.apiUrl}/task`, {name: newTask, project_id: projectId})
   }
 
   getTaskID(name): Observable<any>{
-   	return this.httpClient.get<any>(`${environment.apiUrl}/tasks`);
+    return this.httpClient.get<any>(`${environment.apiUrl}/tasks`);
   }
 
   //getProjectId(task_id): Observable<any>{
-  // 	return this.httpClient.get<any>(`${environment.apiUrl}/proj`);
+  //  return this.httpClient.get<any>(`${environment.apiUrl}/proj`);
   //}
 
 

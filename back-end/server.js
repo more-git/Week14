@@ -46,6 +46,17 @@ mongoose.connection.once('open', function(){
         });
     })
 
+    app.get('/tasks/*', function (request, response) {
+        if (request.params[0]) console.log(request.params[0]);
+        var query = Tasks.find({'project_id': request.params[0]});
+        query.exec(function (err, docs){
+            response.status(200);
+            response.send(JSON.stringify({docs}));
+        });
+        
+    })
+
+
     app.post('/task', function(request, response){
         var taskDate = new Date();
         taskDate = JSON.stringify(taskDate.toJSON().slice(0,19).replace('T',':'));
@@ -286,13 +297,6 @@ mongoose.connection.once('open', function(){
             }
 
         })
-
-
- 
-
-
-
-
 
         // tasksComponent
         socket.on('startTask', function (taskName) {

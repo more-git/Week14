@@ -26,17 +26,19 @@ export class TaskComponent implements OnInit {
     private route: ActivatedRoute,
     private location: Location,
     private router: Router,
-    private timerService: TimerService
+    private timerService: TimerService,
   ) { }
 
   ngOnInit(): void {
 
     this.projectId = this.route.snapshot.params['id'];
 
-    this.tasksService.getTasks().subscribe(returnTasks => {
+    this.tasksService.getProjectTasks(this.projectId).subscribe(returnTasks => {
       this.tasks = returnTasks.docs;
       this.tasksService.displayProjectTasks(this.tasks, this.projectId);
     })
+    
+
     console.log("projectId = "+ this.projectId);
   }
 
