@@ -35,15 +35,7 @@ export class TaskComponent implements OnInit {
       this.tasks = returnTasks.docs;
       this.tasksService.displayProjectTasks(this.tasks, this.projectId);
     })
-
-
     console.log("projectId = "+ this.projectId);
-    //if (this.projectId) {
-    //        this.title = 'Edit Product';
-    //        this.projectService.getById(this.projectId).subscribe(x => this.project = x);
-    //    }
-    
-
   }
 
   saveTask(){
@@ -61,6 +53,21 @@ export class TaskComponent implements OnInit {
       console.log(error);
     })
   }
+  
+  startTask(task): void {
+    console.log("start("+task.name+")");
+    this.timerService.startTask(task.name);
+  }
 
+  stopTask(task): void {
+    
+    console.log("stop("+task.name+")");
+    console.log("task_id = "+task.task_id);
+    this.timerService.stopTask(task.name);
+
+    this.timerService.updateTimer(task.name).subscribe(totalTime => {
+      task.totalTime = totalTime;
+    })
+  }
 
 }
