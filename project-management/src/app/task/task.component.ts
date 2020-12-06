@@ -3,6 +3,7 @@ import {TasksService} from "../_services/tasks.service";
 //import { PubSubService } from '../_services/pubsub.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { TimerService } from "../_services/timer.service";
 import {switchMap } from 'rxjs/operators';
 
 
@@ -25,6 +26,7 @@ export class TaskComponent implements OnInit {
     private route: ActivatedRoute,
     private location: Location,
     private router: Router,
+    private timerService: TimerService
   ) { }
 
   ngOnInit(): void {
