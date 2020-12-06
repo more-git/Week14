@@ -118,10 +118,6 @@ class TaskComponent {
             this.tasksService.displayProjectTasks(this.tasks, this.projectId);
         });
         console.log("projectId = " + this.projectId);
-        //if (this.projectId) {
-        //        this.title = 'Edit Product';
-        //        this.projectService.getById(this.projectId).subscribe(x => this.project = x);
-        //    }
     }
     saveTask() {
         this.tasksService.create(this.newTask, this.projectId).subscribe(saveTask => {

@@ -136,7 +136,7 @@ mongoose.connection.once('open', function(){
             var diff = stopDate -  startDate;
             console.log('diff (milliseconds) '+diff);
             diff /= 60000;
-            diff = Math.round(diff);
+            diff = diff.toFixed(2);
             console.log('diff (minutes)'+diff);
             res.status(200);
             res.send(diff.toString());// send totalTime(minutes)
@@ -166,7 +166,7 @@ mongoose.connection.once('open', function(){
             diff = stopDate -  startDate;
             console.log('diff (milliseconds) '+diff);
             diff /= 60000;
-            diff = Math.round(diff);
+            diff = diff.toFixed(2);
             console.log('diff (minutes)'+diff);
             res.status(200);
             res.send(diff.toString());// send totalTime(minutes)
@@ -243,7 +243,7 @@ mongoose.connection.once('open', function(){
                     var diff = stopDate -  startDate;
                     console.log('diff (milliseconds) '+diff);
                     diff /= 60000;
-                    diff = Math.round(diff);
+                    diff = diff.toFixed(2);
                     console.log('diff (minutes)'+diff);
                 } 
             }); 
@@ -326,7 +326,7 @@ mongoose.connection.once('open', function(){
                     var diff = stopDate -  startDate;
                     console.log('diff (milliseconds) '+diff);
                     diff /= 60000;
-                    diff = Math.round(diff);
+                    diff = diff.toFixed(2);
                     console.log('diff (minutes)'+diff);
                 } 
             }); 
