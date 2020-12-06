@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {TasksService} from "../_services/tasks.service";
 //import { PubSubService } from '../_services/pubsub.service';
-import {TasksService} from "../_services/tasks.service";
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { TimerService } from "../_services/timer.service";
