@@ -73,4 +73,10 @@ export class ProjectManagementComponent implements OnInit {
     })
 
   }
+
+  saveId(projectId){
+    this.projectsService.sendId(projectId);
+    alert(projectId);
+  }
+
 }

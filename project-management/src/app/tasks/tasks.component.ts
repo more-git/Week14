@@ -33,9 +33,9 @@ export class TasksComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.tasksService.getTasks().subscribe(returnTasks => {
-      this.tasks = returnTasks.docs;
-    })
+    //this.tasksService.getTasks().subscribe(returnTasks => {
+      //this.tasks = returnTasks.docs;
+   // })
   }
 
   saveTask(){
@@ -50,7 +50,7 @@ export class TasksComponent implements OnInit {
   }
 
   stopTask(task): void {
-    
+
     console.log("stop("+task.name+")");
     console.log("task_id = "+task.task_id);
     this.timerService.stopTask(task.name);

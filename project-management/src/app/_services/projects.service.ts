@@ -11,6 +11,7 @@ import { map } from "rxjs/operators";
   providedIn: 'root'
 })
 export class ProjectsService {
+  public projectId;
 
   constructor(private socket: Socket, private httpClient: HttpClient) { }
 
@@ -60,6 +61,14 @@ export class ProjectsService {
     params = params.append('task_name', name);
     console.log("getDiff(name) = "+ name);
     return this.httpClient.get<any>(`${environment.apiUrl}/diff`, {params: params});
+  }
+
+  sendId(id): any {
+    this.projectId = id;
+  }
+
+  getId(): any{
+    return this.projectId;
   }
 
 }
