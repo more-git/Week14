@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {TasksService} from "../_services/tasks.service";
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import {switchMap } from 'rxjs/operators';
 import {ProjectsService} from "../_services/projects.service";
@@ -20,7 +20,8 @@ export class TaskComponent implements OnInit {
     private tasksService: TasksService,
     private route: ActivatedRoute,
     private location: Location,
-    private projectsService: ProjectsService
+    private projectsService: ProjectsService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -28,6 +29,9 @@ export class TaskComponent implements OnInit {
     this.tasksService.getTasks(this.projectId).subscribe(returnTasks => {
       this.tasks = returnTasks.docs;
     })
+    
+    this.projectId = this.route.snapshot.params['id'];
+
   }
 
   saveTask(){
