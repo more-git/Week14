@@ -1,9 +1,14 @@
 <nav class="navbar navbar-light bg-dark">
-  <!--<a [routerLink]="'project-management'" routerLinkActive="active" class="navbar-brand text-light">Project Management</a>-->
   <a [routerLink]="'project-management'" routerLinkActive="active" class="navbar-brand text-light">Project Management</a>
-  <a [routerLink]="'tasks'" class="navbar-brand text-light" >Tasks</a>
 </nav>
 
 <div class="container">
   <router-outlet></router-outlet>
 </div>
+
+<footer class="page-footer font-small bg-dark fixed-bottom">
+
+  <div class="footer-copyright text-center text-light py-3">© 2020 Copyright
+  </div>
+
+</footer>

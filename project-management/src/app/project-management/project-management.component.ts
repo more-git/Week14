@@ -37,6 +37,7 @@ export class ProjectManagementComponent implements OnInit {
   }
 
   saveProject(): void {
+
     this.projectsService.create(this.newProject).subscribe( saveProject => {
       	this.projects.push(saveProject);
     })
