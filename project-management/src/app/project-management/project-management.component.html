@@ -22,7 +22,7 @@
 <div *ngFor="let project of projects">
   <div class="row">
     <!--<h4>{{ project.name }}</h4>-->
-    <a [routerLink]="'tasks'" (click)="saveId()">{{ project.name }}</a>
+    <a [routerLink]="'task'" (click)="saveId(project._id)">{{ project.name }}</a>
     <button type="button" class="btn btn-danger" (click)="deleteProject(project)">Delete</button>
     <button type="button" class="btn btn-secondary" (click)="newEditProject(editModal, project)">Edit</button>
   </div>

@@ -87,7 +87,8 @@ export class ProjectManagementComponent implements OnInit {
 
   }
 
-  saveId(){
-    this.projectsService.sendId(this.newProject._id);
+  saveId(projectId){
+    this.projectsService.sendId(projectId);
+    alert(projectId);
   }
 }

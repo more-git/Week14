@@ -56,7 +56,12 @@ export class ProjectsService {
 
   sendId(id): any {
      this.projectId = id;
-     alert(id);
   }
+
+  getId(): any{
+    return this.projectId;
+  }
+
+
 
 }

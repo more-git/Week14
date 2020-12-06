@@ -74,10 +74,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function TaskComponent_div_5_Template(rf, ctx) { if (rf & 1) {
+    const _r3 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 3);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "h4");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "button", 4);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function TaskComponent_div_5_Template_button_click_4_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r3); const task_r1 = ctx.$implicit; const ctx_r2 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r2.deleteTask(task_r1); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](5, "Delete");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -92,20 +97,29 @@ class TaskComponent {
         this.projectsService = projectsService;
     }
     ngOnInit() {
+        this.projectId = this.projectsService.getId();
         this.tasksService.getTasks(this.projectId).subscribe(returnTasks => {
             this.tasks = returnTasks.docss;
         });
+        //this.tasksService.getTasks(this.tasks, this.projectId).subscribe(returnTasks => {
+        //this.tasks = returnTasks.docss;
+        // })
     }
     saveTask() {
-        this.projectId = this.projectsService.send2Id();
-        alert(this.projectId);
         this.tasksService.create(this.newTask, this.projectId).subscribe(saveTask => {
             this.tasks.push(saveTask);
         });
     }
+    deleteTask(taskToDelete) {
+        this.projectsService.destroy(taskToDelete).subscribe(success => {
+            this.tasks = this.projectsService.removeProject(this.tasks, taskToDelete);
+        }, error => {
+            console.log(error);
+        });
+    }
 }
 TaskComponent.ɵfac = function TaskComponent_Factory(t) { return new (t || TaskComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_tasks_service__WEBPACK_IMPORTED_MODULE_1__["TasksService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_projects_service__WEBPACK_IMPORTED_MODULE_2__["ProjectsService"])); };
-TaskComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: TaskComponent, selectors: [["app-task"]], inputs: { childMessage: "childMessage" }, decls: 6, vars: 2, consts: [[3, "ngModel", "ngModelChange"], [3, "click"], [4, "ngFor", "ngForOf"], [1, "row"]], template: function TaskComponent_Template(rf, ctx) { if (rf & 1) {
+TaskComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: TaskComponent, selectors: [["app-task"]], inputs: { childMessage: "childMessage" }, decls: 6, vars: 2, consts: [[3, "ngModel", "ngModelChange"], [3, "click"], [4, "ngFor", "ngForOf"], [1, "row"], ["type", "button", 1, "btn", "btn-danger", 3, "click"]], template: function TaskComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "h3");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "Tasks");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -116,7 +130,7 @@ TaskComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComp
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function TaskComponent_Template_button_click_3_listener() { return ctx.saveTask(); });
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](4, "Save");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](5, TaskComponent_div_5_Template, 4, 1, "div", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](5, TaskComponent_div_5_Template, 6, 1, "div", 2);
     } if (rf & 2) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx.newTask);
@@ -538,6 +552,7 @@ class TasksService {
     }
     getTasks(projectId) {
         return this.httpClient.get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].apiUrl}/tasks/${projectId}`);
+        //this.displayProjectTasks(tasks, projectId);
     }
     create(newTask, projectId) {
         return this.httpClient.post(`${_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].apiUrl}/task`, { name: newTask, project_id: projectId });
@@ -548,6 +563,17 @@ class TasksService {
             if (arrayTasks[i]._id === taskIdToKeep) {
                 arrayProjectTasks = arrayTasks.splice(i, 1);
                 return arrayProjectTasks;
+            }
+        }
+    }
+    destroy(name) {
+        return this.httpClient.delete(`${_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].apiUrl}/task/${name._id}`);
+    }
+    removeProject(arrayNames, nameToRemove) {
+        for (let i = 0; i <= arrayNames.length; i++) {
+            if (arrayNames[i]._id === nameToRemove._id) {
+                arrayNames.splice(i, 1);
+                return arrayNames;
             }
         }
     }
@@ -625,9 +651,8 @@ class ProjectsService {
     }
     sendId(id) {
         this.projectId = id;
-        alert(id);
     }
-    send2Id() {
+    getId() {
         return this.projectId;
     }
 }
@@ -730,7 +755,7 @@ function ProjectManagementComponent_div_15_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 10);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "a", 11);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function ProjectManagementComponent_div_15_Template_a_click_2_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r8); const ctx_r7 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r7.saveId(); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function ProjectManagementComponent_div_15_Template_a_click_2_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r8); const project_r6 = ctx.$implicit; const ctx_r7 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r7.saveId(project_r6._id); });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "button", 12);
@@ -746,7 +771,7 @@ function ProjectManagementComponent_div_15_Template(rf, ctx) { if (rf & 1) {
 } if (rf & 2) {
     const project_r6 = ctx.$implicit;
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", "tasks");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", "task");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](project_r6.name);
 } }
@@ -832,8 +857,9 @@ class ProjectManagementComponent {
             console.log(error);
         });
     }
-    saveId() {
-        this.projectsService.sendId(this.newProject._id);
+    saveId(projectId) {
+        this.projectsService.sendId(projectId);
+        alert(projectId);
     }
 }
 ProjectManagementComponent.ɵfac = function ProjectManagementComponent_Factory(t) { return new (t || ProjectManagementComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_projects_service__WEBPACK_IMPORTED_MODULE_2__["ProjectsService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_3__["NgbModal"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_timer_service__WEBPACK_IMPORTED_MODULE_4__["TimerService"])); };

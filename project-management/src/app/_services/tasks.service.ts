@@ -12,6 +12,7 @@ export class TasksService {
 
   getTasks(projectId): Observable<any>{
     return this.httpClient.get<any>(`${environment.apiUrl}/tasks/${projectId}`);
+    //this.displayProjectTasks(tasks, projectId);
   }
 
   create(newTask, projectId){
@@ -24,6 +25,19 @@ export class TasksService {
       if (arrayTasks[i]._id === taskIdToKeep) {
         arrayProjectTasks = arrayTasks.splice(i, 1);
         return arrayProjectTasks;
+      }
+    }
+  }
+
+  destroy(name): Observable<any> {
+    return this.httpClient.delete(`${environment.apiUrl}/task/${name._id}`);
+  }
+
+  removeProject(arrayNames, nameToRemove): any {
+    for (let i = 0; i <= arrayNames.length; i++) {
+      if (arrayNames[i]._id === nameToRemove._id) {
+        arrayNames.splice(i, 1);
+        return arrayNames;
       }
     }
   }
