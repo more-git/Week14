@@ -5,7 +5,11 @@
 <h3>Projects!</h3>
 <div *ngFor="let project of projects">
   <div class="row">
-    <a [routerLink]="'tasks'" (click)="saveId(project._id)">{{ project.name }}</a>
+    <a [routerLink]= "['task', project._id]">{{ project.name }}</a>
+    <!--<a [routerLink]= "['task', project.name]">{{ project.name }}</a>-->
+    <!--path: 'task/:id'-->
+    <!--<a [routerLink]="'tasks'">{{ project.name }}</a>-->
+   
     <button type="button" class="btn btn-danger" (click)="deleteProject(project)">Delete</button>
      <button class="hui-button hui-button-small hui-button-icon-only js-edit-entry" (click)="newEditProject(editModal, project)" title="Edit Entry" type="button">
             <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="currentColor">

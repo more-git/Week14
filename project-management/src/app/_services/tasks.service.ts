@@ -12,8 +12,8 @@ export class TasksService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getTasks(projectId): Observable<any>{
-    return this.httpClient.get<any>(`${environment.apiUrl}/tasks/${projectId}`);
+  getTasks(): Observable<any>{
+    return this.httpClient.get<any>(`${environment.apiUrl}/tasks`);
   }
 
   create(newTask, projectId){
@@ -27,16 +27,6 @@ export class TasksService {
   //getProjectId(task_id): Observable<any>{
   // 	return this.httpClient.get<any>(`${environment.apiUrl}/proj`);
   //}
-
-  displayProjectTasks( arrayTasks, taskIdToKeep ): any{
-    var arrayProjectTasks;
-    for (let i = 0; i <= arrayTasks.length; i++) {
-      if (arrayTasks[i]._id === taskIdToKeep) {
-        arrayProjectTasks = arrayTasks.splice(i, 1);
-        return arrayProjectTasks;
-      }
-    }
-  }
-
+  
 }
 

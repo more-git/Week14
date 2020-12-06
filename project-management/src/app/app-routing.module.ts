@@ -9,6 +9,7 @@ const routes: Routes = [
   {path: 'project-management/tasks', component: TasksComponent},
   {path: 'project-management/task', component: TaskComponent},
   {path: 'project-management/task/:id', component: TaskComponent},
+
   {path : 'task', component: TaskComponent},
   {
         path: 'project-management/task',
@@ -16,8 +17,11 @@ const routes: Routes = [
      
         children: [
             { path: 'task/:id', component: TaskComponent }
+            //{ path: ':id', component: TaskComponent},
+			      //{ path: '**', component: TaskComponent},
         ]
   },
+  //{ path: '**', redirectTo: '' }
 ];
 
 @NgModule({
