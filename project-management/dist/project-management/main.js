@@ -33,21 +33,10 @@ module.exports = __webpack_require__(/*! C:\Users\marti\OneDrive\Documents\GitHu
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "environment", function() { return environment; });
-// This file can be replaced during build by using the `fileReplacements` array.
-// `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
-// The list of file replacements can be found in `angular.json`.
 const environment = {
     production: false,
     apiUrl: 'http://localhost:8080'
 };
-/*
- * For easier debugging in development mode, you can import the following file
- * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
- *
- * This import should be commented out in production mode because it will have a negative impact
- * on performance if an error is thrown.
- */
-// import 'zone.js/dist/zone-error';  // Included with Angular CLI.
 
 
 /***/ }),
@@ -103,7 +92,6 @@ function TaskComponent_div_5_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"]("Total Time: ", task_r1.totalTime, "");
 } }
 class TaskComponent {
-    //public project;
     constructor(tasksService, route, location, router, timerService) {
         this.tasksService = tasksService;
         this.route = route;
@@ -115,7 +103,6 @@ class TaskComponent {
         this.projectId = this.route.snapshot.params['id'];
         this.tasksService.getProjectTasks(this.projectId).subscribe(returnTasks => {
             this.tasks = returnTasks.docs;
-            //this.tasksService.displayProjectTasks(this.tasks, this.projectId);
         });
         console.log("projectId = " + this.projectId);
     }
@@ -171,121 +158,6 @@ TaskComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComp
                 styleUrls: ['./task.component.css']
             }]
     }], function () { return [{ type: _services_tasks_service__WEBPACK_IMPORTED_MODULE_1__["TasksService"] }, { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"] }, { type: _angular_common__WEBPACK_IMPORTED_MODULE_3__["Location"] }, { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] }, { type: _services_timer_service__WEBPACK_IMPORTED_MODULE_4__["TimerService"] }]; }, null); })();
-
-
-/***/ }),
-
-/***/ "GXPF":
-/*!******************************************!*\
-  !*** ./src/app/tasks/tasks.component.ts ***!
-  \******************************************/
-/*! exports provided: TasksComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TasksComponent", function() { return TasksComponent; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var _services_tasks_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../_services/tasks.service */ "cQvo");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "tyNb");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ "ofXK");
-/* harmony import */ var _services_timer_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../_services/timer.service */ "Gd1H");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ "3Pt+");
-
-
-
-
-
-
-
-function TasksComponent_div_5_Template(rf, ctx) { if (rf & 1) {
-    const _r3 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 3);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "h4");
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "button", 4);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function TasksComponent_div_5_Template_button_click_4_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r3); const task_r1 = ctx.$implicit; const ctx_r2 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r2.startTask(task_r1); });
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](5, "Start");
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "button", 5);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function TasksComponent_div_5_Template_button_click_6_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r3); const task_r1 = ctx.$implicit; const ctx_r4 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r4.stopTask(task_r1); });
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](7, "Stop");
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](8, "h4");
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](9);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-} if (rf & 2) {
-    const task_r1 = ctx.$implicit;
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"]("", task_r1.name, " ");
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](6);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"]("Total Time: ", task_r1.totalTime, "");
-} }
-class TasksComponent {
-    constructor(tasksService, route, location, timerService) {
-        this.tasksService = tasksService;
-        this.route = route;
-        this.location = location;
-        this.timerService = timerService;
-    }
-    ngOnInit() {
-        this.tasksService.getTasks().subscribe(returnTasks => {
-            this.tasks = returnTasks.docs;
-        });
-    }
-    saveTask() {
-        this.tasksService.create(this.newTask, this.taskId).subscribe(saveTask => {
-            if (saveTask)
-                this.tasks.push(saveTask);
-        });
-    }
-    startTask(task) {
-        console.log("start(" + task.name + ")");
-        this.timerService.startTask(task.name);
-    }
-    stopTask(task) {
-        console.log("stop(" + task.name + ")");
-        console.log("task_id = " + task.task_id);
-        this.timerService.stopTask(task.name);
-        this.timerService.updateTimer(task.name).subscribe(totalTime => {
-            task.totalTime = totalTime;
-        });
-        /*this.timerService.updateTotalTime(task.task_id).subscribe(totalTime => {
-          task.totalTime = totalTime;
-        })*/
-    }
-}
-TasksComponent.ɵfac = function TasksComponent_Factory(t) { return new (t || TasksComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_tasks_service__WEBPACK_IMPORTED_MODULE_1__["TasksService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_common__WEBPACK_IMPORTED_MODULE_3__["Location"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_timer_service__WEBPACK_IMPORTED_MODULE_4__["TimerService"])); };
-TasksComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: TasksComponent, selectors: [["app-task"]], decls: 6, vars: 2, consts: [[3, "ngModel", "ngModelChange"], [3, "click"], [4, "ngFor", "ngForOf"], [1, "row"], [1, "startTask", 3, "click"], [1, "stopTask", 3, "click"]], template: function TasksComponent_Template(rf, ctx) { if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "h3");
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "Tasks");
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "input", 0);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function TasksComponent_Template_input_ngModelChange_2_listener($event) { return ctx.newTask = $event; });
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "button", 1);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function TasksComponent_Template_button_click_3_listener() { return ctx.saveTask(); });
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](4, "Save");
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](5, TasksComponent_div_5_Template, 10, 2, "div", 2);
-    } if (rf & 2) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx.newTask);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx.tasks);
-    } }, directives: [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["DefaultValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_5__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_5__["NgModel"], _angular_common__WEBPACK_IMPORTED_MODULE_3__["NgForOf"]], styles: [".row[_ngcontent-%COMP%] {\r\n  margin-bottom: 12px;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: space-between;\r\n}\r\n\r\n\r\nbutton[_ngcontent-%COMP%] {\r\n  font-size: 14px;\r\n  background-color: white;\r\n  -webkit-appearance: none;\r\n     -moz-appearance: none;\r\n          appearance: none;\r\n\r\n}\r\n\r\n\r\n.startTask[_ngcontent-%COMP%] {\r\n  cursor: pointer;\r\n  margin-left: 14px;\r\n}\r\n\r\n\r\n.stopTask[_ngcontent-%COMP%] {\r\n  cursor: pointer;\r\n  margin-left: 14px;\r\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdGFza3MvdGFza3MuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLG1CQUFtQjtFQUNuQixhQUFhO0VBQ2IsbUJBQW1CO0VBQ25CLDhCQUE4QjtBQUNoQzs7O0FBR0E7RUFDRSxlQUFlO0VBQ2YsdUJBQXVCO0VBQ3ZCLHdCQUFnQjtLQUFoQixxQkFBZ0I7VUFBaEIsZ0JBQWdCOztBQUVsQjs7O0FBR0E7RUFDRSxlQUFlO0VBQ2YsaUJBQWlCO0FBQ25COzs7QUFFQTtFQUNFLGVBQWU7RUFDZixpQkFBaUI7QUFDbkIiLCJmaWxlIjoic3JjL2FwcC90YXNrcy90YXNrcy5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnJvdyB7XHJcbiAgbWFyZ2luLWJvdHRvbTogMTJweDtcclxuICBkaXNwbGF5OiBmbGV4O1xyXG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XHJcbiAganVzdGlmeS1jb250ZW50OiBzcGFjZS1iZXR3ZWVuO1xyXG59XHJcblxyXG5cclxuYnV0dG9uIHtcclxuICBmb250LXNpemU6IDE0cHg7XHJcbiAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XHJcbiAgYXBwZWFyYW5jZTogbm9uZTtcclxuXHJcbn1cclxuXHJcblxyXG4uc3RhcnRUYXNrIHtcclxuICBjdXJzb3I6IHBvaW50ZXI7XHJcbiAgbWFyZ2luLWxlZnQ6IDE0cHg7XHJcbn1cclxuXHJcbi5zdG9wVGFzayB7XHJcbiAgY3Vyc29yOiBwb2ludGVyO1xyXG4gIG1hcmdpbi1sZWZ0OiAxNHB4O1xyXG59Il19 */"] });
-/*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](TasksComponent, [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
-        args: [{
-                selector: 'app-task',
-                templateUrl: './tasks.component.html',
-                styleUrls: ['./tasks.component.css']
-            }]
-    }], function () { return [{ type: _services_tasks_service__WEBPACK_IMPORTED_MODULE_1__["TasksService"] }, { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"] }, { type: _angular_common__WEBPACK_IMPORTED_MODULE_3__["Location"] }, { type: _services_timer_service__WEBPACK_IMPORTED_MODULE_4__["TimerService"] }]; }, null); })();
 
 
 /***/ }),
@@ -451,8 +323,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common/http */ "tk/3");
 /* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "1kSV");
 /* harmony import */ var ngx_socket_io__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ngx-socket-io */ "7JkF");
-/* harmony import */ var _tasks_tasks_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./tasks/tasks.component */ "GXPF");
-/* harmony import */ var _task_task_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./task/task.component */ "EBRB");
+/* harmony import */ var _task_task_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./task/task.component */ "EBRB");
 
 
 
@@ -466,8 +337,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-//import { ProjectListComponent } from './projects/project-list/project-list.component';
 const config = { url: 'http://localhost:8001', options: {} };
 class AppModule {
 }
@@ -483,8 +352,7 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector
         ]] });
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵsetNgModuleScope"](AppModule, { declarations: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"],
         _project_management_project_management_component__WEBPACK_IMPORTED_MODULE_4__["ProjectManagementComponent"],
-        _tasks_tasks_component__WEBPACK_IMPORTED_MODULE_9__["TasksComponent"],
-        _task_task_component__WEBPACK_IMPORTED_MODULE_10__["TaskComponent"]], imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
+        _task_task_component__WEBPACK_IMPORTED_MODULE_9__["TaskComponent"]], imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
         _app_routing_module__WEBPACK_IMPORTED_MODULE_2__["AppRoutingModule"], ngx_socket_io__WEBPACK_IMPORTED_MODULE_8__["SocketIoModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormsModule"],
         _angular_common_http__WEBPACK_IMPORTED_MODULE_6__["HttpClientModule"],
         _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_7__["NgbModule"],
@@ -495,8 +363,7 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector
                 declarations: [
                     _app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"],
                     _project_management_project_management_component__WEBPACK_IMPORTED_MODULE_4__["ProjectManagementComponent"],
-                    _tasks_tasks_component__WEBPACK_IMPORTED_MODULE_9__["TasksComponent"],
-                    _task_task_component__WEBPACK_IMPORTED_MODULE_10__["TaskComponent"],
+                    _task_task_component__WEBPACK_IMPORTED_MODULE_9__["TaskComponent"]
                 ],
                 imports: [
                     _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
@@ -637,7 +504,6 @@ class ProjectsService {
     updateProject(nameToUpdate) {
         let options = { name: nameToUpdate.name, _id: nameToUpdate._id };
         return this.httpClient.request('PUT', `${_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].apiUrl}/update/`, { body: options });
-        // return this.httpClient.request<any>('PUT', `${environment.apiUrl}/update/${nameToUpdate._id}/${nameToUpdate.name}`);
     }
     editProject(arrayNames, nameToEdit) {
         for (let i = 0; i <= arrayNames.length; i++) {
@@ -682,9 +548,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "tyNb");
 /* harmony import */ var _project_management_project_management_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./project-management/project-management.component */ "wImf");
-/* harmony import */ var _tasks_tasks_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./tasks/tasks.component */ "GXPF");
-/* harmony import */ var _task_task_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./task/task.component */ "EBRB");
-
+/* harmony import */ var _task_task_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./task/task.component */ "EBRB");
 
 
 
@@ -693,18 +557,14 @@ __webpack_require__.r(__webpack_exports__);
 
 const routes = [
     { path: 'project-management', component: _project_management_project_management_component__WEBPACK_IMPORTED_MODULE_2__["ProjectManagementComponent"] },
-    { path: 'project-management/tasks', component: _tasks_tasks_component__WEBPACK_IMPORTED_MODULE_3__["TasksComponent"] },
-    { path: 'project-management/task', component: _task_task_component__WEBPACK_IMPORTED_MODULE_4__["TaskComponent"] },
-    { path: 'project-management/task/:id', component: _task_task_component__WEBPACK_IMPORTED_MODULE_4__["TaskComponent"] },
-    { path: 'tasks', component: _task_task_component__WEBPACK_IMPORTED_MODULE_4__["TaskComponent"] },
-    { path: 'task', component: _task_task_component__WEBPACK_IMPORTED_MODULE_4__["TaskComponent"] },
+    { path: 'project-management/task', component: _task_task_component__WEBPACK_IMPORTED_MODULE_3__["TaskComponent"] },
+    { path: 'project-management/task/:id', component: _task_task_component__WEBPACK_IMPORTED_MODULE_3__["TaskComponent"] },
+    { path: 'task', component: _task_task_component__WEBPACK_IMPORTED_MODULE_3__["TaskComponent"] },
     {
         path: 'project-management/task',
-        component: _task_task_component__WEBPACK_IMPORTED_MODULE_4__["TaskComponent"],
+        component: _task_task_component__WEBPACK_IMPORTED_MODULE_3__["TaskComponent"],
         children: [
-            { path: 'task/:id', component: _task_task_component__WEBPACK_IMPORTED_MODULE_4__["TaskComponent"] }
-            //{ path: ':id', component: TaskComponent},
-            //{ path: '**', component: TaskComponent},
+            { path: 'task/:id', component: _task_task_component__WEBPACK_IMPORTED_MODULE_3__["TaskComponent"] }
         ]
     },
 ];

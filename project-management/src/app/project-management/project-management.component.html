@@ -7,9 +7,7 @@
   <div class="row">
 
     <a [routerLink]= "['task', project._id]">{{ project.name }}</a>
-    <!--<a [routerLink]= "['task', project.name]">{{ project.name }}</a>-->
-    <!--path: 'task/:id'-->
-    <!--<a [routerLink]="'tasks'">{{ project.name }}</a>-->
+
   </div>
    <button type="button" class="btn btn-danger" (click)="deleteProject(project)">X</button>
     <button class="hui-button hui-button-small hui-button-icon-only js-edit-entry" (click)="newEditProject(editModal, project)" title="Edit Entry" type="button">

@@ -39,7 +39,6 @@ export class ProjectsService {
   updateProject( nameToUpdate ): any{
     let options = { name: nameToUpdate.name, _id: nameToUpdate._id };
     return this.httpClient.request<any>('PUT', `${environment.apiUrl}/update/`, { body: options });
-    // return this.httpClient.request<any>('PUT', `${environment.apiUrl}/update/${nameToUpdate._id}/${nameToUpdate.name}`);
   }
 
   editProject( arrayNames, nameToEdit ): any{

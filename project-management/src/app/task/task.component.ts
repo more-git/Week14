@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {TasksService} from "../_services/tasks.service";
-//import { PubSubService } from '../_services/pubsub.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { TimerService } from "../_services/timer.service";
-import {switchMap } from 'rxjs/operators';
 
 
 @Component({
@@ -16,17 +14,14 @@ import {switchMap } from 'rxjs/operators';
 export class TaskComponent implements OnInit {
   public newTask;
   public tasks;
-
   public projectId;
-  //public project;
-
 
   constructor(
     private tasksService: TasksService,
     private route: ActivatedRoute,
     private location: Location,
     private router: Router,
-    private timerService: TimerService,
+    private timerService: TimerService
   ) { }
 
   ngOnInit(): void {
@@ -34,7 +29,6 @@ export class TaskComponent implements OnInit {
 
     this.tasksService.getProjectTasks(this.projectId).subscribe(returnTasks => {
       this.tasks = returnTasks.docs;
-      //this.tasksService.displayProjectTasks(this.tasks, this.projectId);
     })
 
     console.log("projectId = "+ this.projectId);
@@ -45,7 +39,6 @@ export class TaskComponent implements OnInit {
       this.tasks.push(saveTask);
     })
   }
-
 
 
   deleteTask(taskToDelete): void {

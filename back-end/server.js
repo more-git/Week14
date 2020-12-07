@@ -11,7 +11,6 @@ var timerSchema = require('./timer_schema.js').timerSchema;
 var Timer = mongoose.model('Timer', timerSchema);
 
 var io = require('socket.io').listen(8001)
-var nicknames = {};
 
 app.use(express.json());
 
@@ -152,13 +151,7 @@ mongoose.connection.once('open', function(){
             res.status(200);
             res.send(diff.toString());// send totalTime(minutes)
         });
-        
-        /*
-        var query = Timer.findByIdAndUpdate(req.body._id, {"datetime": req.body.name});
-        query.exec(function (err, doc) {
-            res.status(200);
-            res.send(JSON.stringify(doc));
-        });*/
+
 
     }) 
 
@@ -182,22 +175,15 @@ mongoose.connection.once('open', function(){
             res.status(200);
             res.send(diff.toString());// send totalTime(minutes)
 
-            /**/
+
             var query = Tasks.findByIdAndUpdate(req.body.task_id, {"totalTime": diff.toString()});
             query.exec(function (err, doc) {
                 res.status(200);
                 res.send(JSON.stringify(doc));
             });
-            /**/
+
         });
 
-        /*
-        var query = Tasks.findByIdAndUpdate(req.body._id, {"totalTime": diff.toString()});
-        query.exec(function (err, doc) {
-            res.status(200);
-            res.send(JSON.stringify(doc));
-        });*/
-        
 
     }) 
 
@@ -205,21 +191,7 @@ mongoose.connection.once('open', function(){
     // Socket
     io.sockets.on('connection', function (socket) {
         socket.on('user message', function (msg) {
-        // You're going to want to include the nickname - IM project only
             io.sockets.emit('user message', msg);
-        })
-
-        socket.on('nickname', function (nick) {
-            // Instead of checking against an array you'll check against the db 
-            if (nicknames[nick]) {
-                console.log("nickname exists!")
-            } else {
-                console.log("nickname added!")
-                nicknames[nick] = nick;
-                socket.nickname = nick;
-
-            io.sockets.emit('nicknames', nicknames);
-            }
         })
 
 
@@ -258,8 +230,7 @@ mongoose.connection.once('open', function(){
                     console.log('diff (minutes)'+diff);
                 } 
             }); 
-            // update task with task_name == name
-            // remove timer associated with task_id
+
         })   
 
         socket.on('getTimers', () => {
@@ -277,7 +248,6 @@ mongoose.connection.once('open', function(){
             if (start) {
                 var taskDate = new Date();
                 startDate = new Date();
-                // Add the current datetime to the db
 
             } else {
                 // calculate totalTime 
@@ -333,9 +303,7 @@ mongoose.connection.once('open', function(){
                     diff = diff.toFixed(2);
                     console.log('diff (minutes)'+diff);
                 } 
-            }); 
-            // update task with task_name == name
-            // remove timer associated with task_id
+            });
         }) 
     })
 

@@ -2,11 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProjectsService } from "../_services/projects.service";
 import { TimerService } from "../_services/timer.service";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { Project } from "../_models/project.model";
-
-import { interval } from 'rxjs';
-import {Router} from "@angular/router";
 
 
 

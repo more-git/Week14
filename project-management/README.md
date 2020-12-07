@@ -14,6 +14,8 @@
 
 • Fixed Workspace
 
+• Woked on UI or project component
+
 
 ### Nicholas 
 
