@@ -149,7 +149,7 @@ mongoose.connection.once('open', function(){
             diff = diff.toFixed(2);
             console.log('diff (minutes)'+diff);
             res.status(200);
-            res.send(diff.toString());// send totalTime(minutes)
+            res.send(diff.toString());
         });
 
 
@@ -166,14 +166,13 @@ mongoose.connection.once('open', function(){
         var query = Tasks.findOne({_id: req.body.task_id});
         query.exec(function (err, docs){
             startDate = docs.datetime;
-            // calculate totalTime
             diff = stopDate -  startDate;
             console.log('diff (milliseconds) '+diff);
             diff /= 60000;
             diff = diff.toFixed(2);
             console.log('diff (minutes)'+diff);
             res.status(200);
-            res.send(diff.toString());// send totalTime(minutes)
+            res.send(diff.toString());
 
 
             var query = Tasks.findByIdAndUpdate(req.body.task_id, {"totalTime": diff.toString()});
@@ -238,37 +237,6 @@ mongoose.connection.once('open', function(){
             io.emit("time",ms);
         });
 
-
-        var startDate;
-        socket.on('timer', function (start, id) {
-            if (!startDate) {
-                startDate= new Date();
-            }
-
-            if (start) {
-                var taskDate = new Date();
-                startDate = new Date();
-
-            } else {
-                // calculate totalTime 
-                var stopDate = new Date();
-
-                // update totalTime
-                var taskStopped = Tasks.find({project_id: id});
-                var stoppedTimer = Timer.find({task_id: id});
-
-                if (startDate) {
-                    // update Timer.datetime
-                }
-
-                // remove timer
-                //Timer.deleteOne({task_id: id}).exec(function (err, doc) {})
-
-            }
-
-        })
-
-        // tasksComponent
         socket.on('startTask', function (taskName) {
             console.log("start("+taskName+")");
             var startDate = new Date();
@@ -309,4 +277,3 @@ mongoose.connection.once('open', function(){
 
 });
     
-
